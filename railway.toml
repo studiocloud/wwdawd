@@ -1,0 +1,29 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm run build"
+
+[deploy]
+startCommand = "node dist/server/index.js"
+restartPolicy = "ON_FAILURE"
+numReplicas = 1
+
+[deploy.envs]
+NODE_ENV = "production"
+PORT = "5173"
+HOST = "0.0.0.0"
+
+[[services]]
+internal_port = 5173
+protocol = "tcp"
+
+[services.concurrency]
+type = "connections"
+hard_limit = 25
+soft_limit = 20
+
+[[services.ports]]
+port = "5173"
+handlers = ["http"]
+
+[nixpacks]
+node-version = "18"

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "npm run build"
+  },
+  "deploy": {
+    "startCommand": "node dist/server/index.js",
+    "restartPolicyType": "ON_FAILURE",
+    "numReplicas": 1
+  },
+  "variables": {
+    "NODE_ENV": {
+      "value": "production"
+    },
+    "PORT": {
+      "value": "5173"
+    },
+    "HOST": {
+      "value": "0.0.0.0"
+    },
+    "SMTP_HOST": {
+      "required": true,
+      "description": "SMTP server hostname"
+    },
+    "SMTP_PORT": {
+      "required": true,
+      "description": "SMTP server port",
+      "default": "587"
+    },
+    "SMTP_SECURE": {
+      "required": true,
+      "description": "Use TLS for SMTP",
+      "default": "false"
+    },
+    "SMTP_USER": {
+      "required": true,
+      "description": "SMTP username/email"
+    },
+    "SMTP_PASS": {
+      "required": true,
+      "description": "SMTP password",
+      "sensitive": true
+    },
+    "SMTP_FROM": {
+      "required": true,
+      "description": "Email address to send from"
+    },
+    "RATE_LIMIT_WINDOW_MS": {
+      "value": "900000"
+    },
+    "RATE_LIMIT_MAX_REQUESTS": {
+      "value": "100"
+    }
+  }
+}
